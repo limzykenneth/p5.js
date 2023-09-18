@@ -1,7 +1,7 @@
 import p5 from '../core/main';
 import * as constants from '../core/constants';
 import GeometryBuilder from './GeometryBuilder';
-import * as libtess from 'libtess';
+import libtess from 'libtess'; // Fixed with exporting module from libtess
 import './p5.Shader';
 import './p5.Camera';
 import '../core/p5.Renderer';
