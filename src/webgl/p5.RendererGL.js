@@ -7,8 +7,6 @@ import './p5.Camera';
 import '../core/p5.Renderer';
 import './p5.Matrix';
 import './p5.Framebuffer';
-// import { readFileSync } from 'fs';
-// import { join } from 'path';
 
 const STROKE_CAP_ENUM = {};
 const STROKE_JOIN_ENUM = {};
@@ -31,55 +29,72 @@ defineStrokeJoinEnum('ROUND', 0);
 defineStrokeJoinEnum('MITER', 1);
 defineStrokeJoinEnum('BEVEL', 2);
 
-const lightingShader = '';
-const webgl2CompatibilityShader = '';
+import lightingShader from './shaders/lighting.glsl';
+import webgl2CompatibilityShader from './shaders/webgl2Compatibility.glsl';
+import immediateVert from './shaders/immediate.vert';
+import vertexColorVert from './shaders/vertexColor.vert';
+import vertexColorFrag from './shaders/vertexColor.frag';
+import normalVert from './shaders/normal.vert';
+import normalFrag from './shaders/normal.frag';
+import basicFrag from './shaders/basic.frag';
+import lightVert from './shaders/light.vert';
+import lightTextureFrag from './shaders/light_texture.frag';
+import phongVert from './shaders/phong.vert';
+import phongFrag from './shaders/phong.frag';
+import fontVert from './shaders/font.vert';
+import fontFrag from './shaders/font.frag';
+import lineVert from './shaders/line.vert';
+import lineFrag from './shaders/line.frag';
+import pointVert from './shaders/point.vert';
+import pointFrag from './shaders/point.frag';
 
 const defaultShaders = {
-  immediateVert: '',
-  vertexColorVert: '',
-  vertexColorFrag: '',
-  normalVert: '',
-  normalFrag: '',
-  basicFrag: '',
+  immediateVert,
+  vertexColorVert,
+  vertexColorFrag,
+  normalVert,
+  normalFrag,
+  basicFrag,
   lightVert:
     lightingShader +
-    '',
-  lightTextureFrag: '',
-  phongVert: '',
+    lightVert,
+  lightTextureFrag,
+  phongVert,
   phongFrag:
     lightingShader +
-    '',
+    phongFrag,
   fontVert: webgl2CompatibilityShader +
-    '',
+    fontVert,
   fontFrag: webgl2CompatibilityShader +
-    '',
+    fontFrag,
   lineVert:
-    lineDefs + '',
+    lineDefs + lineVert,
   lineFrag:
-    lineDefs + '',
-  pointVert: '',
-  pointFrag: ''
+    lineDefs + lineFrag,
+  pointVert,
+  pointFrag
 };
 
+import filterGrayFrag from './shaders/filters/gray.frag';
+import filterErodeFrag from './shaders/filters/erode.frag';
+import filterDilateFrag from './shaders/filters/dilate.frag';
+import filterBlurFrag from './shaders/filters/blur.frag';
+import filterPosterizeFrag from './shaders/filters/posterize.frag';
+import filterOpaqueFrag from './shaders/filters/opaque.frag';
+import filterInvertFrag from './shaders/filters/invert.frag';
+import filterThresholdFrag from './shaders/filters/threshold.frag';
+import filterShaderVert from './shaders/filters/default.vert';
+
 const filterShaderFrags = {
-  [constants.GRAY]:
-    '',
-  [constants.ERODE]:
-    '',
-  [constants.DILATE]:
-    '',
-  [constants.BLUR]:
-    '',
-  [constants.POSTERIZE]:
-    '',
-  [constants.OPAQUE]:
-    '',
-  [constants.INVERT]:
-    '',
-  [constants.THRESHOLD]:
-    ''
+  [constants.GRAY]: filterGrayFrag,
+  [constants.ERODE]: filterErodeFrag,
+  [constants.DILATE]: filterDilateFrag,
+  [constants.BLUR]: filterBlurFrag,
+  [constants.POSTERIZE]: filterPosterizeFrag,
+  [constants.OPAQUE]: filterOpaqueFrag,
+  [constants.INVERT]: filterInvertFrag,
+  [constants.THRESHOLD]: filterThresholdFrag
 };
-const filterShaderVert = '';
 
 /**
  * @module Rendering
