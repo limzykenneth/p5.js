@@ -547,6 +547,7 @@ p5.prototype._copyHelper = (
 /**
  * @method filter
  * @param  {Constant} filterType
+ * @param  {Number} [filterParam]
  * @param  {Boolean} [useWebGL]
  */
 /**

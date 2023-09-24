@@ -298,7 +298,7 @@ suite('p5.RendererGL', function() {
 
     test('filter() can opt out of WEBGL implementation', function() {
       let renderer = myp5.createCanvas(3,3);
-      myp5.filter(myp5.BLUR, useWebGL=false);
+      myp5.filter(myp5.BLUR, 3, false);
       assert.isUndefined(renderer._pInst.filterGraphicsLayer);
     });
 
