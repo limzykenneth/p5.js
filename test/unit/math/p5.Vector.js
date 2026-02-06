@@ -1370,7 +1370,7 @@ suite('p5.Vector', function () {
       expect(v.lerp()).to.eql(v);
     });
 
-    // PEND: ADD BACK IN
+    // TODO PEND: ADD BACK IN
     // suite('with p5.Vector', function() {
     //   test('should call lerp with 4 arguments', function() {
     //     spyOn(v, 'lerp').andCallThrough();

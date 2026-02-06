@@ -30,6 +30,7 @@ const calculateRemainder3D = function (xComponent, yComponent, zComponent) {
 };
 
 class Vector {
+
   values = [];
 
   // This is how it comes in with createVector()
@@ -377,6 +378,8 @@ class Vector {
     }
   }
 
+
+
   /**
    * Adds to a vector's components.
    *
@@ -512,19 +515,25 @@ class Vector {
    * @chainable
    */
   add(...args) {
-    if (args[0] instanceof Vector) {
-      args = args[0].values;
-    } else if (Array.isArray(args[0])) {
-      args = args[0];
-    }
-
-    const resultDimension = Math.min(args.length, this.dimensions);
+    const resultDimension = this._smallerDimensionPriority(args.length, this.dimensions);
+    console.log("args:", args)
+    console.log("resultDimension:", resultDimension)
     this.values = this.values.reduce((acc, v, i) => {
       if(i < resultDimension) acc[i] = this.values[i] + args[i];
       return acc;
     }, new Array(resultDimension));
 
     return this;
+  }
+
+  _smallerDimensionPriority(dimOther, dimSelf) {
+    const resultDimension = Math.min(dimOther, dimSelf);
+    if (dimOther != dimSelf) {
+      p5._friendlyError(
+        'TODO Please dont mismatch vector size'
+      );
+    }
+    return resultDimension
   }
 
   /**
@@ -648,12 +657,6 @@ class Vector {
    * @chainable
    */
   rem(...args) {
-    if (args[0] instanceof Vector) {
-      args = args[0].values;
-    } else if (Array.isArray(args[0])) {
-      args = args[0];
-    }
-
     if(!args.every(v => v !== 0 && Number.isFinite(v))) return this;
 
     const resultDimension = Math.min(args.length, this.dimensions);
@@ -847,12 +850,6 @@ class Vector {
    * @chainable
    */
   sub(...args) {
-    if (args[0] instanceof Vector) {
-      args = args[0].values;
-    } else if (Array.isArray(args[0])) {
-      args = args[0];
-    }
-
     const resultDimension = Math.min(args.length, this.dimensions);
     this.values = this.values.reduce((acc, v, i) => {
       if(i < resultDimension) acc[i] = this.values[i] - args[i];
@@ -1056,12 +1053,6 @@ class Vector {
    * @chainable
    */
   mult(...args) {
-    if (args[0] instanceof Vector) {
-      args = args[0].values;
-    } else if (Array.isArray(args[0])) {
-      args = args[0];
-    }
-
     if(!args.every(v => v !== 0 && Number.isFinite(v))) return this;
 
     const resultDimension = Math.min(args.length, this.dimensions);
@@ -1306,11 +1297,6 @@ class Vector {
    * @chainable
    */
   div(...args) {
-    if (args[0] instanceof Vector) {
-      args = args[0].values;
-    } else if (Array.isArray(args[0])) {
-      args = args[0];
-    }
 
     if(!args.every(v => v !== 0 && Number.isFinite(v))) return this;
 
